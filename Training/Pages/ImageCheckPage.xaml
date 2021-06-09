@@ -9,6 +9,26 @@
       Title="ImageCheckPage">
 
     <Grid>
+
+        <StackPanel VerticalAlignment="Center"
+                    Width="400">
+            
+            <Image x:Name="Img"
+                   MaxHeight="400"/>
+
+            <Button x:Name="BtnDownload"
+                    Content="Загрузить изображение"
+                    Click="BtnDownload_Click"
+                    Style="{StaticResource BlueButton}"
+                    Margin="0 20 0 0"/>
+
+            <Button x:Name="BtnRotate"
+                    Content="Повернуть изображение"
+                    Click="BtnRotate_Click"
+                    Style="{StaticResource BlueButton}"
+                    Margin="0 20 0 0"/>
+            
+        </StackPanel>
         
     </Grid>
 </Page>

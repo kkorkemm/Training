@@ -4,10 +4,15 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Training.Pages"
+      xmlns:ViewModel="clr-namespace:Training.ViewModel"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="MainPage">
 
+    <Page.DataContext>
+        <ViewModel:MainViewModel/>
+    </Page.DataContext>
+    
     <Grid>
 
         <Grid.ColumnDefinitions>
@@ -53,30 +58,41 @@
                           HorizontalScrollBarVisibility="Disabled"
                           VerticalScrollBarVisibility="Auto">
                 <StackPanel>
-                    <RadioButton Content="Проверка изображений"
-                             Style="{StaticResource MenuButton}"
-                             IsChecked="True"
-                             Height="60"/>
+                    <RadioButton Content="Проверка и поворот изображений"
+                                 Style="{StaticResource MenuButton}"
+                                 IsChecked="True"
+                                 Height="60"
+                                 Command="{Binding ImageCheckCommand}"/>
                     <RadioButton Content="Автодополнение"
-                             Height="60"
-                             Style="{StaticResource MenuButton}"/>
+                                 Height="60"
+                                 Style="{StaticResource MenuButton}"
+                                 Command="{Binding AutoCompleteCommand}"/>
                     <RadioButton Content="Генерация изображений"
-                             Height="60"
-                             Style="{StaticResource MenuButton}"/>
+                                 Height="60"
+                                 Style="{StaticResource MenuButton}"/>
                     <RadioButton Content="Графики"
-                             Height="60"
-                             Style="{StaticResource MenuButton}"/>
-                    <RadioButton Content="Работа с CSV"
-                             Height="60"
-                             Style="{StaticResource MenuButton}"/>
+                                 Height="60"
+                                 Style="{StaticResource MenuButton}"/>
+                    <RadioButton Content="Работа с Word, Excel, CSV"
+                                 Height="60"
+                                 Style="{StaticResource MenuButton}"/>
                     <RadioButton Content="Проверка Email"
-                             Height="60"
-                             Style="{StaticResource MenuButton}"/>
+                                 Height="60"
+                                 Style="{StaticResource MenuButton}"/>
                 </StackPanel>
             </ScrollViewer>
             
         </Grid>
-        
-        
+
+        <Grid Grid.Row="1"
+              Grid.Column="1"
+              Background="#eee"/>
+
+        <ContentControl Grid.Row="1"
+                        Grid.Column="1"
+                        Margin="10"
+                        Content="{Binding CurrentView}"/>
+
+
     </Grid>
 </Page>
