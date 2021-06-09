@@ -1,20 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Training
 {
+    using Base;
+    using Pages;
+
     /// <summary>
     /// Логика взаимодействия для MainWindow.xaml
     /// </summary>
@@ -23,6 +16,37 @@ namespace Training
         public MainWindow()
         {
             InitializeComponent();
+
+            /// Проверка на то, запомнен ли пользователь
+            string file = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\Training\login.txt";
+
+            if (File.Exists(file))
+            {
+                string login;
+
+                using (StreamReader sr = new StreamReader(file))
+                {
+                    login = sr.ReadLine();
+                    sr.Close();
+                }
+
+                var user = TrainingDBEntities.GetContext().User.Where(p => p.Login == login).FirstOrDefault();
+                
+                if (user != null)
+                {
+                    TrainingDBEntities.currentUser = user;
+                    MainFrame.Navigate(new MainPage());
+                }
+                else
+                {
+                    MainFrame.Navigate(new LoginPage());
+                }
+            }
+            else
+            {
+                MainFrame.Navigate(new LoginPage());
+            }
+
             Navigation.MainFrame = MainFrame;
         }
     }
