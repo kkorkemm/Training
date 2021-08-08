@@ -1,5 +1,7 @@
 # Practicing writing a README
 
+(This README does not relate to an existing repository in any way)
+
 Here are several diagrams describing the operation of the system. 
 
 ## Getting Started
